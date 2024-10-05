@@ -16,7 +16,6 @@ class BookParser:
         soup = BeautifulSoup(html, "html.parser")
         return soup
 
-
     def get_links(self, soup: BeautifulSoup):
         """Collect links to all chapters"""
         chapter_links = []
@@ -31,27 +30,37 @@ class BookParser:
             if subchapters:
                 for subchapter in subchapters.find_all("a"):
                     if "href" in subchapter.attrs:
-                        full_url = requests.compat.urljoin(self.base_url, subchapter["href"])
+                        full_url = requests.compat.urljoin(
+                            self.base_url, subchapter["href"]
+                        )
                         chapter_links.append(full_url)
         return chapter_links
-
 
     def parse_chapter(self, chapter_url: str):
         """Find text and return each paragraph with chapter name in a dict"""
         ch_soup = self.parse_url(chapter_url)
-        chapter = ch_soup.find("h1")
+        chapter = ch_soup.find("h2")
         chapter_name = chapter.get_text(strip=True)
+        section_name = chapter_name
         main_content_div = ch_soup.find("div", class_="book edition2")
+        many_line_paragraph = []
 
         chapter_contents = []
-        for paragraph in main_content_div.find_all("p"):
-            paragraph_text = paragraph.get_text(strip=True)
-            chapter_contents.append({"chapter": chapter_name, "text": paragraph_text})
+        for element in main_content_div.find_all(['h3', 'p', 'pre']):
+            if element.name == 'h3':
+                if many_line_paragraph:
+                    paragraph_text = " ".join(many_line_paragraph)
+                    chapter_contents.append({"chapter": chapter_name, "section": section_name, "text": paragraph_text})
+                    many_line_paragraph = []
+                section_name = element.get_text().strip()
+            else:
+                text = element.get_text(separator='\n').strip()
+                many_line_paragraph.append(text)
 
         # respect
         time.sleep(1)
         return chapter_contents
-    
+
     def parse(self):
         """Collect all book chapters"""
         soup = self.parse_url(self.url)

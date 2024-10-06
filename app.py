@@ -6,7 +6,7 @@ st.title("💬 Git Assistant")
 st.caption("🚀 Pro-Git enhanced with AI")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "How to commit changes in a file?"}
+        {"role": "assistant", "content": "Let me help you with git! What is your question?"}
     ]
 
 for msg in st.session_state.messages:

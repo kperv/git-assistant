@@ -18,7 +18,7 @@ class GitAssistant:
         context_docs = " \n".join(context)
         prompt = f"""
             Analyze manual documents and answer the user question: {question}. 
-            Generate a concise list of steps to implement.
+            Generate a concise list of steps to implement. Keep it short.
             
             Manual:
             {context_docs}

@@ -1,2 +1,3 @@
 git-assistant-venv/
 *.csv
+.idea/

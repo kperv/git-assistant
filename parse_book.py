@@ -46,15 +46,21 @@ class BookParser:
         many_line_paragraph = []
 
         chapter_contents = []
-        for element in main_content_div.find_all(['h3', 'p', 'pre']):
-            if element.name == 'h3':
+        for element in main_content_div.find_all(["h3", "p", "pre"]):
+            if element.name == "h3":
                 if many_line_paragraph:
                     paragraph_text = " ".join(many_line_paragraph)
-                    chapter_contents.append({"chapter": chapter_name, "section": section_name, "text": paragraph_text})
+                    chapter_contents.append(
+                        {
+                            "chapter": chapter_name,
+                            "section": section_name,
+                            "text": paragraph_text,
+                        }
+                    )
                     many_line_paragraph = []
                 section_name = element.get_text().strip()
             else:
-                text = element.get_text(separator='\n').strip()
+                text = element.get_text(separator="\n").strip()
                 many_line_paragraph.append(text)
 
         # respect

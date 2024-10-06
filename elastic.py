@@ -2,29 +2,24 @@ from tqdm import tqdm
 import pandas as pd
 from elasticsearch import Elasticsearch
 
+
 class DocumentsRetriver:
-    elastic_url: str = 'http://localhost:9200'
+    elastic_url: str = "http://localhost:9200"
     index_name: str = "pro-git-book"
 
     def __init__(self, num_docs: int = 2):
         self.num_docs = num_docs
         self.es_client = Elasticsearch(self.elastic_url)
-        book = pd.read_csv('book.csv')
-        self.documents = book.to_dict(orient='records')
+        book = pd.read_csv("book.csv")
+        self.documents = book.to_dict(orient="records")
         self.index_documents()
 
     def index_documents(self):
         index_settings = {
-            "settings": {
-                "number_of_shards": 1,
-                "number_of_replicas": 0
-            },
+            "settings": {"number_of_shards": 1, "number_of_replicas": 0},
             "mappings": {
-                "properties": {
-                    "text": {"type": "text"},
-                    "chapter": {"type": "keyword"} 
-                }
-            }
+                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}}
+            },
         }
         self.es_client.indices.delete(index=self.index_name, ignore_unavailable=True)
         self.es_client.indices.create(index=self.index_name, body=index_settings)
@@ -44,14 +39,16 @@ class DocumentsRetriver:
                             "multi_match": {
                                 "query": query,
                                 "fields": ["text", "chapter"],
-                                "type": "best_fields"
+                                "type": "best_fields",
                             }
                         },
                     }
-                }
+                },
             }
             response = self.es_client.search(index=self.index_name, body=search_query)
-            relevant_documents = [item['_source']['text'] for item in response['hits']['hits']]
+            relevant_documents = [
+                item["_source"]["text"] for item in response["hits"]["hits"]
+            ]
             return relevant_documents
 
     def is_valid_query(self, query: str):
@@ -67,5 +64,5 @@ def main():
         print(text)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

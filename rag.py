@@ -6,8 +6,8 @@ from elastic import DocumentsRetriver
 class GitAssistant:
     def __init__(self):
         self.client = OpenAI(
-            base_url='http://localhost:11434/v1/',
-            api_key='ollama',
+            base_url="http://localhost:11434/v1/",
+            api_key="ollama",
         )
         self.retriever = DocumentsRetriver()
 
@@ -27,9 +27,9 @@ class GitAssistant:
 
     def response(self, prompt: str):
         response = self.client.chat.completions.create(
-            model='llama3',
+            model="llama3",
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.5
+            temperature=0.5,
         )
         return response.choices[0].message.content
 

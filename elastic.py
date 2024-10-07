@@ -56,7 +56,7 @@ class DocumentsRetriver:
                 "query_vector": v_q,
                 "k": 5,
                 "num_candidates": 10000,
-                "boost": 0.5,
+                "boost": 0.2,
             }
             # text
             keyword_query = {
@@ -64,9 +64,9 @@ class DocumentsRetriver:
                     "must": {
                         "multi_match": {
                             "query": query,
-                            "fields": ["text", "chapter", "section^3"],
+                            "fields": ["text^3", "chapter", "section"],
                             "type": "best_fields",
-                            "boost": 0.5,
+                            "boost": 0.8,
                         }
                     },
                 }
@@ -78,8 +78,6 @@ class DocumentsRetriver:
                 knn=knn_query,
                 size=self.num_docs,
             )
-            print("*" * 20)
-            print(response)
             relevant_documents = [item["_source"] for item in response["hits"]["hits"]]
             return relevant_documents
 

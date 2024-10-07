@@ -12,10 +12,10 @@ class GitAssistant:
             api_key="ollama",
         )
         try:
-            book_df = pd.read_csv('book.csv')
+            book_df = pd.read_csv('/ssd/ksu/projects/git-assistant/book.csv')
         except FileNotFoundError:
             book_df = self.load_book()
-            book_df.to_csv('book.csv', index=False)
+            book_df.to_csv('/ssd/ksu/projects/git-assistant/book.csv', index=False)
         self.retriever = DocumentsRetriver(book_df)
 
     def load_book(self):
@@ -42,34 +42,14 @@ class GitAssistant:
 
 
         prompt = f"""
-            Read question context in MANUAL. Provide the 'Chapter' and 'Section' in the first line after 'Pro Git:' startup. 
-            Then analyze text in the 'Text' section and answer the user question. 
-            Generate a concise list of steps to implement. Keep it short. Format code, if necessary.
-
-            Example:
-
-            QUESTION: What is git?
-
-            MANUAL:
-            Chapter: 1.Getting Started
-            Section: Local Version Control Systems
-            Text: Many people’s version-control method of choice is to copy files into another directory (perhaps a time-stamped directory, if they’re clever).
-            This approach is very common because it is so simple, but it is also incredibly error prone.
-            It is easy to forget which directory you’re in and accidentally write to the wrong file or copy over files you don’t mean to. To deal with this issue, programmers long ago developed local VCSs that had a simple database that kept all the changes to files under revision control. One of the most popular VCS tools was a system called RCS, which is still distributed with many computers today.
-
-            ANSWER:
-            Pro Git: Chapter 1.Getting Started, Section Local Version Control Systems.
-
-            Git is a version control system that helps keep track of changes.
-
-            
+            You are provided a section of a BOOK, analyze text in the 'Text' section and find a section that answers user question. 
+            Format code, if necessary.
 
             QUESTION: {question}
 
-            MANUAL:
+            BOOK:
             {context_for_prompt}
         """
-        print(prompt)
         return prompt
 
     def response(self, prompt: str):
@@ -82,6 +62,7 @@ class GitAssistant:
 
     def answer(self, question: str):
         context = self.search_book(question)
+        print(context)
         prompt = self.build_prompt(question, context)
         answer = self.response(prompt)
         return answer

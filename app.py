@@ -12,7 +12,10 @@ st.link_button("Pro Git Book", "https://git-scm.com/book/en/v2")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "Let me help you with git! What is your question?"}
+        {
+            "role": "assistant",
+            "content": "Let me help you with git! What is your question?",
+        }
     ]
 
 for msg in st.session_state.messages:

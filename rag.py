@@ -12,10 +12,10 @@ class GitAssistant:
             api_key="ollama",
         )
         try:
-            book_df = pd.read_csv('/ssd/ksu/projects/git-assistant/book.csv')
+            book_df = pd.read_csv("/ssd/ksu/projects/git-assistant/book.csv")
         except FileNotFoundError:
             book_df = self.load_book()
-            book_df.to_csv('/ssd/ksu/projects/git-assistant/book.csv', index=False)
+            book_df.to_csv("/ssd/ksu/projects/git-assistant/book.csv", index=False)
         self.retriever = DocumentsRetriver(book_df)
 
     def load_book(self):
@@ -39,7 +39,6 @@ class GitAssistant:
             context_docs.append(context_doc)
 
         context_for_prompt = " \n\n###".join(context_docs)
-
 
         prompt = f"""
             You are provided a section of a BOOK, analyze text in the 'Text' section and find a section that answers user question. 
@@ -67,12 +66,12 @@ class GitAssistant:
         answer = self.response(prompt)
         return answer
 
+
 def main():
     assistant = GitAssistant()
     question = "how to commit a message?"
     answer = assistant.answer(question)
     print(answer)
-
 
 
 if __name__ == "__main__":

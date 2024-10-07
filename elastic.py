@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 class DocumentsRetriver:
     elastic_url: str = "http://localhost:9200"
     index_name: str = "pro-git-book"
-    model_name: str = 'multi-qa-MiniLM-L6-cos-v1'
+    model_name: str = "multi-qa-MiniLM-L6-cos-v1"
     model = SentenceTransformer(model_name)
 
     def __init__(self, book: pd.DataFrame, num_docs: int = 10):
@@ -19,16 +19,23 @@ class DocumentsRetriver:
 
     def add_vectors(self):
         for doc in self.documents:
-            doc['text_vector'] = self.model.encode(doc['text'])
+            doc["text_vector"] = self.model.encode(doc["text"])
 
     def index_documents(self):
         index_settings = {
             "settings": {"number_of_shards": 1, "number_of_replicas": 0},
             "mappings": {
-                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}, "section": {"type": "keyword"}, "text_vector": {"type": "dense_vector",
-                "dims": 384,
-                "index": True,
-                "similarity": "cosine"}}
+                "properties": {
+                    "text": {"type": "text"},
+                    "chapter": {"type": "keyword"},
+                    "section": {"type": "keyword"},
+                    "text_vector": {
+                        "type": "dense_vector",
+                        "dims": 384,
+                        "index": True,
+                        "similarity": "cosine",
+                    },
+                }
             },
         }
         self.es_client.indices.delete(index=self.index_name, ignore_unavailable=True)
@@ -41,7 +48,7 @@ class DocumentsRetriver:
         if not self.is_valid_query(query):
             print("query is not valid")
             return relevant_documents
-        else:   
+        else:
             # vector
             v_q = self.model.encode(query)
             knn_query = {
@@ -65,12 +72,15 @@ class DocumentsRetriver:
                 }
             }
 
-            response = self.es_client.search(index=self.index_name, query=keyword_query, knn=knn_query, size=self.num_docs)
-            print("*"*20)
+            response = self.es_client.search(
+                index=self.index_name,
+                query=keyword_query,
+                knn=knn_query,
+                size=self.num_docs,
+            )
+            print("*" * 20)
             print(response)
-            relevant_documents = [
-                item["_source"] for item in response["hits"]["hits"]
-            ]
+            relevant_documents = [item["_source"] for item in response["hits"]["hits"]]
             return relevant_documents
 
     def is_valid_query(self, query: str):
@@ -78,7 +88,7 @@ class DocumentsRetriver:
 
 
 def main():
-    book_df = pd.read_csv('/ssd/ksu/projects/git-assistant/book.csv')
+    book_df = pd.read_csv("/ssd/ksu/projects/git-assistant/book.csv")
     retriever = DocumentsRetriver(book_df)
     # retriever.index_documenets()
     query = "How to commit a file?"

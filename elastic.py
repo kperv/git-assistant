@@ -1,5 +1,5 @@
-from tqdm import tqdm
 import pandas as pd
+from tqdm import tqdm
 from elasticsearch import Elasticsearch
 
 
@@ -7,10 +7,9 @@ class DocumentsRetriver:
     elastic_url: str = "http://localhost:9200"
     index_name: str = "pro-git-book"
 
-    def __init__(self, num_docs: int = 2):
+    def __init__(self, book: pd.DataFrame, num_docs: int = 2):
         self.num_docs = num_docs
         self.es_client = Elasticsearch(self.elastic_url)
-        book = pd.read_csv("book.csv")
         self.documents = book.to_dict(orient="records")
         self.index_documents()
 
@@ -52,7 +51,7 @@ class DocumentsRetriver:
             return relevant_documents
 
     def is_valid_query(self, query: str):
-        return True if (query and query.isalpha()) else False
+        return True if len(query) > 0 else False
 
 
 def main():

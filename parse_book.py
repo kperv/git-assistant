@@ -1,7 +1,7 @@
 import time
-from tqdm import tqdm
-import pandas as pd
 import requests
+import pandas as pd
+from tqdm import tqdm
 from bs4 import BeautifulSoup
 
 
@@ -60,10 +60,10 @@ class BookParser:
                     many_line_paragraph = []
                 section_name = element.get_text().strip()
             else:
-                text = element.get_text(separator="\n").strip()
+                text = element.get_text().strip()
                 many_line_paragraph.append(text)
 
-        # respect
+        # respect url
         time.sleep(1)
         return chapter_contents
 
@@ -84,6 +84,7 @@ def main():
     parser = BookParser()
     book = parser.parse()
     book_df = pd.DataFrame.from_dict(book)
+    book_df.dropna(inplace=True)
     book_df.to_csv("book.csv", index=False)
 
 

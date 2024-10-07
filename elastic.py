@@ -17,7 +17,7 @@ class DocumentsRetriver:
         index_settings = {
             "settings": {"number_of_shards": 1, "number_of_replicas": 0},
             "mappings": {
-                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}}
+                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}, "section": {"type": "keyword"}}
             },
         }
         self.es_client.indices.delete(index=self.index_name, ignore_unavailable=True)
@@ -25,9 +25,10 @@ class DocumentsRetriver:
         for doc in tqdm(self.documents):
             self.es_client.index(index=self.index_name, document=doc)
 
-    def find_documents(self, query: str):
+        def find_documents(self, query: str):
         relevant_documents = []
         if not self.is_valid_query(query):
+            print("query is not valid")
             return relevant_documents
         else:
             search_query = {
@@ -37,7 +38,7 @@ class DocumentsRetriver:
                         "must": {
                             "multi_match": {
                                 "query": query,
-                                "fields": ["text", "chapter"],
+                                "fields": ["text", "chapter", "section^3"],
                                 "type": "best_fields",
                             }
                         },

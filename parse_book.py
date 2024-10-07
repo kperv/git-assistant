@@ -63,7 +63,7 @@ class BookParser:
                 text = element.get_text().strip()
                 many_line_paragraph.append(text)
 
-        # respect url
+        # respect url server
         time.sleep(1)
         return chapter_contents
 

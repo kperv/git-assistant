@@ -38,30 +38,33 @@ class GitAssistant:
 
 
         prompt = f"""
-            Analyze Text sections from MANUAL documents and answer the user question: {question}. 
+            Analyze Text sections from MANUAL documents and answer the user question. 
             Generate a concise list of steps to implement. Keep it short. Format code, if necessary.
+            In the end of your answer provide Chapter and Section information from Manual as in example below.
 
             Example:
-            QUESTION:
-            What is git?
+
+            QUESTION: What is git?
 
             MANUAL:
             Chapter: 1.Getting Started
             Section: Local Version Control Systems
             Text: Many people’s version-control method of choice is to copy files into another directory (perhaps a time-stamped directory, if they’re clever).
-This approach is very common because it is so simple, but it is also incredibly error prone.
-It is easy to forget which directory you’re in and accidentally write to the wrong file or copy over files you don’t mean to. To deal with this issue, programmers long ago developed local VCSs that had a simple database that kept all the changes to files under revision control. One of the most popular VCS tools was a system called RCS, which is still distributed with many computers today.
+            This approach is very common because it is so simple, but it is also incredibly error prone.
+            It is easy to forget which directory you’re in and accidentally write to the wrong file or copy over files you don’t mean to. To deal with this issue, programmers long ago developed local VCSs that had a simple database that kept all the changes to files under revision control. One of the most popular VCS tools was a system called RCS, which is still distributed with many computers today.
 
             ANSWER: 
-            Git is a version control wywtem that helps keep track of changes.
+            Git is a version control system that helps keep track of changes.
+
+            Pro Git:
             Look for Chapter 1.Getting Started, Section Local Version Control Systems to learn more.
 
-            
+            QUESTION: {question}
+
             MANUAL:
             {context_for_prompt}
-
-
         """
+        print(prompt)
         return prompt
 
     def response(self, prompt: str):

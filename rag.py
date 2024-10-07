@@ -41,8 +41,8 @@ class GitAssistant:
         context_for_prompt = " \n\n###".join(context_docs)
 
         prompt = f"""
-            You are provided a section of a BOOK, analyze text in the 'Text' section and find a section that answers user question. 
-            Format code, if necessary.
+            You are provided a section of a BOOK, analyze text in the 'Text' section and answer the question. 
+            Make it short and easy to understand. 
 
             QUESTION: {question}
 

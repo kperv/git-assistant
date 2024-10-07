@@ -10,7 +10,7 @@ class DocumentsRetriver:
     model_name: str = "multi-qa-MiniLM-L6-cos-v1"
     model = SentenceTransformer(model_name)
 
-    def __init__(self, book: pd.DataFrame, num_docs: int = 10):
+    def __init__(self, book: pd.DataFrame, num_docs: int = 3):
         self.num_docs = num_docs
         self.es_client = Elasticsearch(self.elastic_url)
         self.documents = book.to_dict(orient="records")
@@ -64,7 +64,7 @@ class DocumentsRetriver:
                     "must": {
                         "multi_match": {
                             "query": query,
-                            "fields": ["text^3", "chapter", "section"],
+                            "fields": ["text^4", "chapter", "section"],
                             "type": "best_fields",
                             "boost": 0.8,
                         }

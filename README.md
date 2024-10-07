@@ -1,6 +1,6 @@
 # git-assistant
 AI assistant to help with git version control
-The project is live on **git-assistant.pro**
+The project is **live** on [git-assistant.pro](http://git-assistant.pro/)
 
 ## What git-assistant can do?
 

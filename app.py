@@ -21,6 +21,6 @@ for msg in st.session_state.messages:
 if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user", avatar="👨‍💻").write(prompt)
-    response = assistant.response(prompt)
-    st.session_state.messages.append({"role": "assistant", "content": response})
-    st.chat_message("assistant", avatar="🤖").write(response)
+    answer = assistant.answer(prompt)
+    st.session_state.messages.append({"role": "assistant", "content": answer})
+    st.chat_message("assistant", avatar="🤖").write(answer)

@@ -42,9 +42,9 @@ class GitAssistant:
 
 
         prompt = f"""
-            Analyze Text sections from MANUAL documents and answer the user question. 
+            Read question context in MANUAL. Provide the 'Chapter' and 'Section' in the first line after 'Pro Git:' startup. 
+            Then analyze text in the 'Text' section and answer the user question. 
             Generate a concise list of steps to implement. Keep it short. Format code, if necessary.
-            In the end of your answer provide Chapter and Section information from Manual as in example below.
 
             Example:
 
@@ -57,11 +57,12 @@ class GitAssistant:
             This approach is very common because it is so simple, but it is also incredibly error prone.
             It is easy to forget which directory you’re in and accidentally write to the wrong file or copy over files you don’t mean to. To deal with this issue, programmers long ago developed local VCSs that had a simple database that kept all the changes to files under revision control. One of the most popular VCS tools was a system called RCS, which is still distributed with many computers today.
 
-            ANSWER: 
+            ANSWER:
+            Pro Git: Chapter 1.Getting Started, Section Local Version Control Systems.
+
             Git is a version control system that helps keep track of changes.
 
-            Pro Git:
-            Look for Chapter 1.Getting Started, Section Local Version Control Systems to learn more.
+            
 
             QUESTION: {question}
 

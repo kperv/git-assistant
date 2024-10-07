@@ -60,7 +60,7 @@ class BookParser:
                     many_line_paragraph = []
                 section_name = element.get_text().strip()
             else:
-                text = element.get_text(separator="\n").strip()
+                text = element.get_text().strip()
                 many_line_paragraph.append(text)
 
         # respect
@@ -71,7 +71,7 @@ class BookParser:
         """Collect all book chapters"""
         soup = self.parse_url(self.url)
         chapters = self.get_links(soup)
-
+        print(f"Number of chapters: {len(chapters)}")
         total_steps = len(chapters)
         book_contents = []
         for chapter in tqdm(chapters, total=total_steps):
@@ -84,7 +84,9 @@ def main():
     parser = BookParser()
     book = parser.parse()
     book_df = pd.DataFrame.from_dict(book)
-    book_df.to_csv("book.csv", index=False)
+    book_df.dropna(inplace=True)
+    print(len(book_df))
+    book_df.to_csv("./book.csv", index=False)
 
 
 if __name__ == "__main__":

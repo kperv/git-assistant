@@ -1,3 +1,5 @@
 git-assistant-venv/
 *.csv
 .idea/
+__pycache__/
+ollama_data

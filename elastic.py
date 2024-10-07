@@ -7,10 +7,9 @@ class DocumentsRetriver:
     elastic_url: str = "http://localhost:9200"
     index_name: str = "pro-git-book"
 
-    def __init__(self, num_docs: int = 2):
+    def __init__(self, book: pd.DataFrame, num_docs: int = 2):
         self.num_docs = num_docs
         self.es_client = Elasticsearch(self.elastic_url)
-        book = pd.read_csv("book.csv")
         self.documents = book.to_dict(orient="records")
         self.index_documents()
 
@@ -18,7 +17,7 @@ class DocumentsRetriver:
         index_settings = {
             "settings": {"number_of_shards": 1, "number_of_replicas": 0},
             "mappings": {
-                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}}
+                "properties": {"text": {"type": "text"}, "chapter": {"type": "keyword"}, "section": {"type": "keyword"}}
             },
         }
         self.es_client.indices.delete(index=self.index_name, ignore_unavailable=True)
@@ -29,6 +28,7 @@ class DocumentsRetriver:
     def find_documents(self, query: str):
         relevant_documents = []
         if not self.is_valid_query(query):
+            print("query is not valid")
             return relevant_documents
         else:
             search_query = {
@@ -38,7 +38,7 @@ class DocumentsRetriver:
                         "must": {
                             "multi_match": {
                                 "query": query,
-                                "fields": ["text", "chapter"],
+                                "fields": ["text", "chapter", "section^3"],
                                 "type": "best_fields",
                             }
                         },
@@ -52,13 +52,14 @@ class DocumentsRetriver:
             return relevant_documents
 
     def is_valid_query(self, query: str):
-        return True if (query and query.isalpha()) else False
+        return True if len(query) > 0 else False
 
 
 def main():
-    retriever = DocumentsRetriver()
+    retriever = DocumentsRetriver(5)
     # retriever.index_documenets()
-    query = "How to commit a file?"
+    query = "What is git?"
+    print(query)
     relevant_texts = retriever.find_documents(query)
     for text in relevant_texts:
         print(text)

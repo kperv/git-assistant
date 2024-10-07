@@ -11,7 +11,11 @@ class GitAssistant:
             base_url="http://localhost:11434/v1/",
             api_key="ollama",
         )
-        book_df = self.load_book()
+        try:
+            book_df = pd.read_csv('book.csv')
+        except FileNotFoundError:
+            book_df = self.load_book()
+            book_df.to_csv('book.csv', index=False)
         self.retriever = DocumentsRetriver(book_df)
 
     def load_book(self):

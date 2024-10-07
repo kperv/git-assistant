@@ -25,7 +25,7 @@ class DocumentsRetriver:
         for doc in tqdm(self.documents):
             self.es_client.index(index=self.index_name, document=doc)
 
-        def find_documents(self, query: str):
+    def find_documents(self, query: str):
         relevant_documents = []
         if not self.is_valid_query(query):
             print("query is not valid")

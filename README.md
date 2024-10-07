@@ -24,8 +24,9 @@ There is a book Pro Git (https://git-scm.com/book/en/v2) that has all the answer
 
 ## Steps to reproduce
 
-* preload llama3 on ollama
+set up llama3 in ollama
 
+run script for in-browser view
 ``` bash
 ./run.sh
 ```

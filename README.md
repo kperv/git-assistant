@@ -12,15 +12,14 @@ How can I add my files?
 How to revert changes?
 
 
-There is a book Pro Git (https://git-scm.com/book/en/v2) that has all the answers. There is no need to read it, let Git Assistant read it for you and answer them in short and useful way. 
+Let Git Assistant answer them in short and useful way. 
 
 
 ## Technologies
 
-* LLM LLama3 (2 GPUs speed up)
+* LLM: LLama3
 * Knowledge base: Elasticsearch
-* Monitoring: Grafana (in development - dev branch)
-* Interface: Streamlit (Live right now on git-assistant.pro)
+* Interface: Streamlit
 
 ## Steps to reproduce
 

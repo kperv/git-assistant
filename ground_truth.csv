@@ -1,0 +1,54 @@
+question,answer
+What is Git?,A distributed version control system
+What command initializes a new Git repository?,git init
+What command is used to check the status of the working directory?,git status
+What command adds changes to the staging area?,git add
+What command commits changes to the repository?,git commit
+What is the purpose of the .gitignore file?,To specify files and directories that should be ignored by Git
+What command shows the commit history?,git log
+What is a branch in Git?,A separate line of development
+What command creates a new branch?,git branch <branch-name>
+What command switches to a different branch?,git checkout <branch-name>
+What command merges a branch into the current branch?,git merge <branch-name>
+What is a remote repository?,A version of the repository hosted on the internet or another network
+What command is used to clone a remote repository?,git clone <repository-url>
+What command fetches changes from a remote repository?,git fetch
+What command pulls changes from a remote repository and merges them?,git pull
+What command pushes local changes to a remote repository?,git push
+What is a commit hash?,A unique identifier for a specific commit
+What does the command 'git reset' do?,It resets the current HEAD to a specified state
+What is the difference between 'git reset' and 'git revert'?,'git reset' changes the commit history
+What is a merge conflict?,A situation where changes from different branches cannot be automatically merged
+What command is used to resolve a merge conflict?,Manually edit the conflicting files and then commit the changes
+What is the purpose of tags in Git?,To mark specific points in history as important
+What command creates a new tag?,git tag <tag-name>
+What is the difference between a lightweight tag and an annotated tag?,Lightweight tags are just pointers
+What does 'git stash' do?,Temporarily saves changes that are not ready to be committed
+What command applies stashed changes?,git stash apply
+What is the purpose of the 'git cherry-pick' command?,To apply a specific commit from one branch to another
+What is the difference between 'git pull' and 'git fetch'?,'git pull' fetches and merges
+What is a fork in Git?,A copy of a repository that allows for independent development
+What is the purpose of the 'git rebase' command?,To integrate changes from one branch into another by moving the entire branch
+What does 'git diff' do?,Shows the differences between changes in the working directory and the index
+What is the purpose of the 'git config' command?,To set configuration options for Git
+What is a submodule in Git?,A repository embedded within another Git repository
+What command initializes a submodule?,git submodule init
+What command updates a submodule?,git submodule update
+What is the purpose of the 'git log --oneline' command?,To display a simplified view of the commit history
+What does 'git blame' do?,Shows who made changes to each line of a file
+What is the purpose of the 'git archive' command?,To create an archive of files from a specific commit
+What is the difference between 'git checkout' and 'git switch'?,'git checkout' can switch branches and restore files
+What is the purpose of the 'git reflog' command?,To show a log of where the HEAD has been
+What does 'git clean' do?,Removes untracked files from the working directory
+What is the purpose of the 'git remote' command?,To manage remote repositories
+What command shows the list of remote repositories?,git remote -v
+What is the purpose of the 'git fetch --prune' command?,To remove references to remote branches that no longer exist
+What is a pull request?,A request to merge changes from one branch into another
+What is the purpose of the 'git bisect' command?,To find the commit that introduced a bug by binary search
+What does 'git tag -d <tag-name>' do?,Deletes a tag
+What is the purpose of the 'git show' command?,To display information about a specific commit or object
+What is the difference between 'git merge' and 'git rebase'?,'git merge' creates a new commit for the merge
+What is the purpose of the 'git commit --amend' command?,To modify the most recent commit
+What does 'git stash pop' do?,Applies stashed changes and removes them from the stash
+What is the purpose of the 'git worktree' command?,To manage multiple working trees attached to the same repository
+What is the significance of the 'HEAD' in Git?,It points to the current commit in the working directory

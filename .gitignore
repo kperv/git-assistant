@@ -1,7 +1,6 @@
 git-assistant-venv/
 git-assistant/
 assistant/
-*.csv
 .idea/
 __pycache__/
 /ssd/*

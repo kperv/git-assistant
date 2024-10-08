@@ -5,3 +5,4 @@ requests
 tqdm
 sentence_transformers
 streamlit
+scikit-learn

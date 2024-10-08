@@ -61,11 +61,8 @@ class GitAssistant:
 
     def answer(self, question: str):
         context = self.search_book(question)
-        print("New question: ")
-        print(question)
         prompt = self.build_prompt(question, context)
         answer = self.response(prompt)
-        print(answer)
         return answer
 
 

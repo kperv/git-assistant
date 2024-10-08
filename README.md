@@ -33,7 +33,7 @@ A dataset with 50 git related questions and answers was generated for evaluation
 Model `gpt-4o-mini` was used for judging and generating ground truth data.
 
 Evaluation is performed by
-* cosine similarity is 46%
+* cosine similarity is 44%
 * LLM-as-a-judge method
 RELEVANT           31
 PARTLY_RELEVANT    11

@@ -32,12 +32,13 @@ Let Git Assistant answer them in short and useful way.
 A dataset with 50 git related questions and answers was generated for evaluation.
 Model `gpt-4o-mini` was used for judging and generating ground truth data.
 
-Evaluation is performed by
-* cosine similarity is 44%
-* LLM-as-a-judge method
-RELEVANT           31
-PARTLY_RELEVANT    11
-NON_RELEVANT       11
+Evaluation results:
+* mean cosine similarity between true answers and assistant answers is 44%
+* LLM-as-a-judge method results:
+
+|RELEVANT|31|
+|PARTLY_RELEVANT|11|
+|NON_RELEVANT|11|
 
 ## Steps to reproduce
 

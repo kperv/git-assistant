@@ -41,9 +41,10 @@ class LLMEvaluator:
 
     def collect_evaluations(self):
         answers = self.read_answers()
+        answers_dict = answers.to_dict(orient="records")
         evaluations = []
 
-        for doc in tqdm(answers):
+        for doc in tqdm(answers_dict):
             question = doc["question"]
             assistant_answer = doc["assistant_answer"]
             prompt = self.build_prompt(question, assistant_answer)
@@ -60,6 +61,7 @@ class LLMEvaluator:
             json_eval = json.loads(str_eval)
             json_evaluations.append(json_eval)
         df_evaluations = pd.DataFrame(json_evaluations)
+        df_evaluations.to_csv('df_evaluations.csv', index=False)
         print("LLM evaluation results:")
         print(df_evaluations.relevance.value_counts())
 

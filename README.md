@@ -31,14 +31,26 @@ gpt-4o-mini was used for judging and generating ground truth data.
 Evaluation is performed by
 * cosine similarity is 46%
 * LLM-as-a-judge method
+RELEVANT           31
+PARTLY_RELEVANT    11
+NON_RELEVANT       11
 
 ## Steps to reproduce
+
+### application
 
 set up llama3 in ollama
 
 run script for in-browser view
 ``` bash
 ./run.sh
+```
+
+### evaluation
+
+``` bash
+python eval.py
+python eval_with_llm.py
 ```
 
 ## Deployment to the Cloud

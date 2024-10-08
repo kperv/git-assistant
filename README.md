@@ -36,6 +36,8 @@ Evaluation results:
 * mean cosine similarity between true answers and assistant answers is 44%
 * LLM-as-a-judge method results:
 
+|relevancy|count|
+|--------|----|
 |RELEVANT|31|
 |PARTLY_RELEVANT|11|
 |NON_RELEVANT|11|

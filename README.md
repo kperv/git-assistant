@@ -1,16 +1,20 @@
 # git-assistant
 
-AI assistant to help with git version control
+AI model to answer questions about Git.
+
+The book Pro Git is used to provide additional knowledge to a model. [Pro Git](https://git-scm.com/book/en/v2)
+
 The project is **live** on [git-assistant.pro](http://git-assistant.pro/)
 
 ## What git-assistant can do?
 
+When working with Git there could be different questions:
 
-What is git?
+- What is git?
 
-How can I add my files?
+- How can I add my files?
 
-How to revert changes?
+- How to revert changes?
 
 
 Let Git Assistant answer them in short and useful way. 
@@ -19,14 +23,14 @@ Let Git Assistant answer them in short and useful way.
 ## Technologies
 
 * LLM: LLama3
-* Knowledge base: Elasticsearch
+* Knowledge base: Elasticsearch (with Hybrid Search Text + Vector)
 * Interface: Streamlit
 
 ## Evaluation
 
 ### Offline evaluation
-a dataset of 50 git related questions and answers generated for evaluation.
-gpt-4o-mini was used for judging and generating ground truth data.
+A dataset with 50 git related questions and answers was generated for evaluation.
+Model `gpt-4o-mini` was used for judging and generating ground truth data.
 
 Evaluation is performed by
 * cosine similarity is 46%
@@ -41,10 +45,11 @@ NON_RELEVANT       11
 
 set up llama3 in ollama
 
-run script for in-browser view
+then run bash script
 ``` bash
 ./run.sh
 ```
+The application will be on 80 port.
 
 ### evaluation
 

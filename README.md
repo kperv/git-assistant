@@ -1,4 +1,5 @@
 # git-assistant
+
 AI assistant to help with git version control
 The project is **live** on [git-assistant.pro](http://git-assistant.pro/)
 
@@ -24,8 +25,12 @@ Let Git Assistant answer them in short and useful way.
 ## Evaluation
 
 ### Offline evaluation
-* 50 git related questions and answers (ChatGPT 4o-mini generated)
-* cosine similarity
+a dataset of 50 git related questions and answers generated for evaluation.
+gpt-4o-mini was used for judging and generating ground truth data.
+
+Evaluation is performed by
+* cosine similarity is 46%
+* LLM-as-a-judge method
 
 ## Steps to reproduce
 

@@ -3,3 +3,5 @@ openai
 pandas
 requests
 tqdm
+sentence_transformers
+streamlit

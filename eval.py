@@ -15,9 +15,9 @@ class GitAssistantEvaluator:
 
     def prepare_ground_truth_data(self):
         try:
-            pairs = pd.read_csv("ground_truth.csv")
+            pairs = pd.read_csv("data/ground_truth.csv")
         except FileNotFoundError:
-            with open("ground_truth_data.txt", "r") as file:
+            with open("data/ground_truth_data.txt", "r") as file:
                 questions = [line.split(", ") for line in file]
 
             pairs = [
@@ -25,7 +25,7 @@ class GitAssistantEvaluator:
                 for q in questions
             ]
             pairs = pd.DataFrame(pairs)
-            pairs.to_csv("ground_truth.csv", index=False)
+            pairs.to_csv("data/ground_truth.csv", index=False)
         return pairs
 
     def add_vectors(self, pairs):

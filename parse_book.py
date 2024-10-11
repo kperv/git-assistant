@@ -85,7 +85,7 @@ def main():
     book = parser.parse()
     book_df = pd.DataFrame.from_dict(book)
     book_df.dropna(inplace=True)
-    book_df.to_csv("book.csv", index=False)
+    book_df.to_csv("data/book.csv", index=False)
 
 
 if __name__ == "__main__":

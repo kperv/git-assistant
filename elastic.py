@@ -86,7 +86,7 @@ class DocumentsRetriver:
 
 
 def main():
-    book_df = pd.read_csv("/ssd/ksu/projects/git-assistant/book.csv")
+    book_df = pd.read_csv("data/book.csv")
     retriever = DocumentsRetriver(book_df)
     # retriever.index_documenets()
     query = "How to commit a file?"

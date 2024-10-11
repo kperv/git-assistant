@@ -12,10 +12,10 @@ class GitAssistant:
             api_key="ollama",
         )
         try:
-            book_df = pd.read_csv("book.csv")
+            book_df = pd.read_csv("data/book.csv")
         except FileNotFoundError:
             book_df = self.load_book()
-            book_df.to_csv("book.csv", index=False)
+            book_df.to_csv("data/book.csv", index=False)
         self.retriever = DocumentsRetriver(book_df)
 
     def load_book(self):

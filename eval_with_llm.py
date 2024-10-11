@@ -15,7 +15,7 @@ class LLMEvaluator:
         return response.choices[0].message.content
 
     def read_answers(self):
-        return pd.read_csv("ground_truth_with_assistant.csv")
+        return pd.read_csv("data/ground_truth_with_assistant.csv")
 
     def build_prompt(self, question, answer):
         prompt = f"""
@@ -61,7 +61,7 @@ class LLMEvaluator:
             json_eval = json.loads(str_eval)
             json_evaluations.append(json_eval)
         df_evaluations = pd.DataFrame(json_evaluations)
-        df_evaluations.to_csv('df_evaluations.csv', index=False)
+        df_evaluations.to_csv('data/df_evaluations.csv', index=False)
         print("LLM evaluation results:")
         print(df_evaluations.relevance.value_counts())
 
